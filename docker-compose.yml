@@ -1,57 +1,11 @@
-version: "3.7"
-
+version: '2'
 services:
-  database:
-    image: mysql:8.0
-    command:
-      - "--default-authentication-plugin=mysql_native_password"
+
+  postgres:
+    image: debezium/postgres:11
     environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_DATABASE=codetest
-      - MYSQL_USER=codetest
-      - MYSQL_PASSWORD=swordfish
+      POSTGRES_PASSWORD: postgres
     ports:
-      - "3306:3306"
-    restart: always
-
-  example-c:
-    image: example-c
-    build: images/example-c
+      - 5433:5433
     volumes:
-      - ./data:/data
-
-  example-node:
-    image: example-node
-    build: images/example-node
-    volumes:
-      - ./data:/data
-
-  example-python:
-    image: example-python
-    build: images/example-python
-    volumes:
-      - ./data:/data
-
-  example-r:
-    image: example-r
-    build: images/example-r
-    volumes:
-      - ./data:/data
-
-  example-ruby:
-    image: example-ruby
-    build: images/example-ruby
-    volumes:
-      - ./data:/data
-
-  example-rust:
-    image: example-rust
-    build: images/example-rust
-    volumes:
-      - ./data:/data
-
-  example-swift:
-    image: example-swift
-    build: images/example-swift
-    volumes:
-      - ./data:/data
+      - $PWD:/home/config
